@@ -10,8 +10,8 @@ const sendMail = async (email, subject, data) => {
         },
     });
 
-    const html = `< !DOCTYPE html>"
-        < html, lang = "en" >
+    const html = `< !DOCTYPE html>
+        < html lang = "en" >
             <head>
                 <meta charset="UTF-8">
                     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -55,8 +55,7 @@ const sendMail = async (email, subject, data) => {
                         </div>
                     </body>
                 </html>
-                `
-        ;
+            `;
 
     await transport.sendMail({
         from: process.env.GMAIL,

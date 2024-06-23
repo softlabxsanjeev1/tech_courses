@@ -5,6 +5,8 @@ import { dbConnection } from './dbConfig/dbconnect.js';
 import morgan from 'morgan'
 import cookieParser from "cookie-parser";
 import userRoutes from './routes/userRoutes.js'
+import courseRoutes from "./routes/courses.js"
+import adminRoutes from './routes/admin.js'
 
 
 const app = express();
@@ -34,6 +36,9 @@ app.use("/test", (req, res) => {
 })
 
 app.use('/api/user', userRoutes);
+app.use('/api/courses', courseRoutes);
+app.use('/api/admin', adminRoutes);
+
 
 app.listen(port, () => {
     console.log(`Server listening on port ${port} ........`)
