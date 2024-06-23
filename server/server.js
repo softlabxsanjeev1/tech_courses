@@ -29,15 +29,18 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(morgan('dev'));
 
+//this middle wate use to read file from uploads folder
+app.use("/uploads", express.static("uploads"));
+
 
 //test get api
-app.use("/test", (req, res) => {
-    res.send(`Server is running on port no ${port}`);
-})
+// app.use("/test", (req, res) => {
+//     res.send(`Server is running on port no ${port}`);
+// })
 
 app.use('/api/user', userRoutes);
-app.use('/api/courses', courseRoutes);
-app.use('/api/admin', adminRoutes);
+app.use('/api/courses', adminRoutes);
+app.use('/api/admin', courseRoutes);
 
 
 app.listen(port, () => {
