@@ -5,7 +5,7 @@ import { dbConnection } from './dbConfig/dbconnect.js';
 import morgan from 'morgan'
 import cookieParser from "cookie-parser";
 import userRoutes from './routes/userRoutes.js'
-import courseRoutes from "./routes/courses.js"
+import courseRoutes from "./routes/course.js"
 import adminRoutes from './routes/admin.js'
 
 
@@ -39,7 +39,7 @@ app.use("/uploads", express.static("uploads"));
 // })
 
 app.use('/api/user', userRoutes);
-app.use('/api/courses', adminRoutes);
+app.use('/api/course', adminRoutes);
 app.use('/api/admin', courseRoutes);
 
 
