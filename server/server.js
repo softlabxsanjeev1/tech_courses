@@ -7,6 +7,7 @@ import cookieParser from "cookie-parser";
 import userRoutes from './routes/userRoutes.js'
 import courseRoutes from "./routes/course.js"
 import adminRoutes from './routes/admin.js'
+import Razorpay from "razorpay"
 
 
 const app = express();
@@ -14,6 +15,13 @@ const app = express();
 dotenv.config();
 // config database 
 dbConnection()
+
+export const instance = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY,
+    key_secret: process.env.RAZORPAY_SECRET,
+});
+
+
 const port = process.env.PORT || 5000
 
 
