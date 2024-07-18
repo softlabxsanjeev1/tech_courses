@@ -6,6 +6,10 @@ import Home from './pages/home/Home'
 import Login from './pages/auth/Login';
 import Register from './pages/auth/Register';
 import Verify from './pages/auth/Verify';
+import Courses from './pages/courses/Courses';
+import Footer from './components/footer/Footer';
+import About from './pages/about/About';
+import Account from './pages/account/Account';
 
 
 const App = () => {
@@ -18,7 +22,11 @@ const App = () => {
           <Route path='/login' element={<Login />} />
           <Route path='/register' element={<Register />} />
           <Route path='/verify' element={<Verify />} />
+          <Route path='/courses' element={<Courses />} />
+          <Route path='/about' element={<About />} />
+          <Route path='/account' element={<Account />} />
         </Routes>
+        <Footer />
       </BrowserRouter>
     </>
   )
