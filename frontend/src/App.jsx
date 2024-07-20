@@ -10,21 +10,25 @@ import Courses from './pages/courses/Courses';
 import Footer from './components/footer/Footer';
 import About from './pages/about/About';
 import Account from './pages/account/Account';
+import { UserData } from './context/UserContext';
 
 
 const App = () => {
+  // receive value from user data from user context 
+  const { isAuth, user } = UserData();
+  // console.log(user)
   return (
     <>
       <BrowserRouter>
-        <Header />
+        <Header isAuth={isAuth} user={user} />
         <Routes>
           <Route path='/' element={<Home />} />
-          <Route path='/login' element={<Login />} />
-          <Route path='/register' element={<Register />} />
-          <Route path='/verify' element={<Verify />} />
+          <Route path='/login' element={isAuth ? <Home /> : <Login />} />
+          <Route path='/register' element={isAuth ? <Home /> : <Register />} />
+          <Route path='/verify' element={isAuth ? <Home /> : <Verify />} />
           <Route path='/courses' element={<Courses />} />
           <Route path='/about' element={<About />} />
-          <Route path='/account' element={<Account />} />
+          <Route path='/account' element={isAuth ? <Account user={user} /> : <Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>
