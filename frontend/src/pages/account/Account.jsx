@@ -6,13 +6,13 @@ import { IoMdLogOut } from "react-icons/io";
 import toast from 'react-hot-toast';
 
 
-function Account({ user }) {
-    // const [setIsAuth, setUser] = UserData()
+function Account({ user, setUser, setIsAuth }) {
+    // const [setUser] = UserData()
 
     const logoutHandler = () => {
         localStorage.clear()
-        // setUser([])
-        // setIsAuth(false)
+        setUser([])
+        setIsAuth(false)
         toast.success("User Logged Out Succesfully")
     }
 

@@ -15,7 +15,7 @@ import { UserData } from './context/UserContext';
 
 const App = () => {
   // receive value from user data from user context 
-  const { isAuth, user } = UserData();
+  const { isAuth, user, setUser, setIsAuth } = UserData();
   // console.log(user)
   return (
     <>
@@ -28,7 +28,7 @@ const App = () => {
           <Route path='/verify' element={isAuth ? <Home /> : <Verify />} />
           <Route path='/courses' element={<Courses />} />
           <Route path='/about' element={<About />} />
-          <Route path='/account' element={isAuth ? <Account user={user} /> : <Login />} />
+          <Route path='/account' element={isAuth ? <Account user={user} setUser={setUser} setIsAuth={setIsAuth} /> : <Login />} />
         </Routes>
         <Footer />
       </BrowserRouter>
