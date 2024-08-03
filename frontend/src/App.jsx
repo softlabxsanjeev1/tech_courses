@@ -20,6 +20,8 @@ import Lecture from './pages/lecture/Lecture';
 import AdminDashboard from './admin/Dashboard/AdminDashboard';
 import AdminCourses from './admin/Courses/AdminCourses';
 import AdminUsers from './admin/Users/AdminUsers'
+import ForgotPassword from './pages/auth/ForgotPassword';
+import ResetPassword from './pages/auth/ResetPassword';
 
 
 const App = () => {
@@ -38,6 +40,8 @@ const App = () => {
             <Route path='/login' element={isAuth ? <Home /> : <Login />} />
             <Route path='/register' element={isAuth ? <Home /> : <Register />} />
             <Route path='/verify' element={isAuth ? <Home /> : <Verify />} />
+            <Route path='/forgot' element={isAuth ? <Home /> : <ForgotPassword />} />
+            <Route path='/reset-password/:token' element={isAuth ? <Home /> : <ResetPassword />} />
             <Route path='/courses' element={<Courses />} />
             <Route path='/about' element={<About />} />
             <Route path='/account' element={isAuth ? <Account user={user} setUser={setUser} setIsAuth={setIsAuth} /> : <Login />} />
