@@ -13,7 +13,9 @@ export const UserContextProvider = ({ children }) => {
     const [btnLoading, setBtnLoading] = useState(false);
     const [loading, setLoading] = useState(true)
 
-    async function loginUser(email, password, navigate) {
+
+    // login user 
+    async function loginUser(email, password, navigate, fetchMyCourse) {
         setBtnLoading(true)
         try {
             const { data } = await axios.post(`${server}/api/user/login`, {
@@ -25,6 +27,7 @@ export const UserContextProvider = ({ children }) => {
             setIsAuth(true)
             setBtnLoading(false)
             navigate("/")
+            fetchMyCourse()
         } catch (error) {
             console.log(error)
             setBtnLoading(false)
@@ -33,6 +36,46 @@ export const UserContextProvider = ({ children }) => {
         }
     }
 
+
+    // regiter user 
+    async function registerUser(name, email, password, navigate) {
+        setBtnLoading(true)
+        try {
+            const { data } = await axios.post(`${server}/api/user/register`, {
+                name, email, password
+            });
+            toast.success(data.message);
+            localStorage.setItem("activationToken", data.activationToken);
+            setBtnLoading(false)
+            navigate("/verify")
+        } catch (error) {
+            console.log(error)
+            setBtnLoading(false)
+            toast.error(error.response.data.message);
+        }
+    }
+
+    // verify otp 
+    async function verifyOtp(otp, navigate) {
+        setBtnLoading(true);
+        const activationToken = localStorage.getItem("activationToken")
+        try {
+            const { data } = await axios.post(`${server}/api/user/verify`, {
+                otp,
+                activationToken,
+            });
+            toast.success(data.message);
+            setBtnLoading(false)
+            navigate("/login");
+            localStorage.clear();
+        } catch (error) {
+            setBtnLoading(false)
+            toast.error(error.response.data.message);
+        }
+    }
+
+
+    // fetch user 
     async function fetchUser() {
         try {
             const { data } = await axios.get(`${server}/api/user/me`, {
@@ -53,7 +96,11 @@ export const UserContextProvider = ({ children }) => {
         fetchUser()
     }, [])
     return (
-        <UserContext.Provider value={{ user, setUser, setIsAuth, isAuth, loginUser, btnLoading, loading }}>
+        <UserContext.Provider value={{
+            user, setUser, setIsAuth,
+            isAuth, loginUser, btnLoading, loading,
+            registerUser, verifyOtp, fetchUser
+        }}>
             {children}
             <Toaster />
         </UserContext.Provider>

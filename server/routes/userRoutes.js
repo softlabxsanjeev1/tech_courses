@@ -12,8 +12,8 @@ router.post('/login', loginUser);
 router.get("/me", isAuth, myProfile)
 router.get("/mycourse", isAuth, getMyCourses);
 // check out route
-router.get("/course/checkout/:id", isAuth, checkout);
-router.get("/verification/:id", isAuth, paymentVerification);
+router.post("/course/checkout/:id", isAuth, checkout);
+router.post("/verification/:id", isAuth, paymentVerification);
 
 
 export default router;
